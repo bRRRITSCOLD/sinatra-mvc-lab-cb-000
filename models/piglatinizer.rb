@@ -25,5 +25,5 @@ class PigLatinizer
     def to_pig_latin(text)
       piglatinize(text)
     end
-    
+
 end
