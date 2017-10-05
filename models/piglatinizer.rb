@@ -1,9 +1,31 @@
-<h1>Your Text Analysis</h1>
+class PigLatinizer
 
-<h2>Number of Words: <%= @analyzed_text.count_of_words %></h2>
+  def piglatinize(word)
 
-<h2>Vowels: <%= @analyzed_text.count_of_vowels %></h2>
+    non_pig_latin_words = ["i", "me", "to", "too", "a", "an", "in", "and", "on"]
+    vowels = ["a", "e", "i", "o", "u"]
 
-<h2>Consonants: <%= @analyzed_text.count_of_consonants %></h2>
+    if non_pig_latin_words.include?(word)
+      word
+    elsif vowels.include? word[0]
+      word << "ay"
+    else
+      consonants = ""
+      while !vowels.include?(word[0])
+        consonants << word[0]
+        word = word.split("")[1..-1].join
+      end
+      word + consonants + 'ay'
+    end
+  end
 
-<h2>Most Common Letter: <%= @analyzed_text.most_used_letter.keys.first.upcase %>, used <%= @analyzed_text.most_used_letter.values.first %> times</h2>
+
+  def to_pig_latin(string)
+    string.split.collect{|word| piglatinize(word)}.join(" ")
+  end
+
+end
+
+p = PigLatinizer.new
+
+puts p.piglatinize("pork")
