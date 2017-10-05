@@ -1,25 +1,29 @@
 class PigLatinizer
 
-  	def piglatinize(word)
-		word = word.split("")
-		alpha = ('a'..'z').to_a
-		vowels = %w[a e i o u]
-		consonants = alpha - vowels
-		if vowels.include?(word[0].downcase)
-			return "#{word.join("")}way"
-		elsif consonants.include?(word[0].downcase)
-			until vowels.include?(word[0].downcase)
-				word.rotate!(1)
-			end
-			return "#{word.join('')}ay"
-		end
-	end
+  def piglatinize(text)
+    new_line = ''
 
-  	def to_pig_latin(phrase)
-  		phrase = phrase.split(" ")
-		phrase.map! do |word|
-			piglatinize(word)
-		end
-		phrase.join(' ')
-  	end
+    text.split(' ').each { |word|
+      first_vowel_index = word.index(/[aeiouAEIOU]/)
+
+      if first_vowel_index == 0
+        new_word = word + 'way'
+      else
+        new_word = word[first_vowel_index..-1] + word[0...first_vowel_index] + 'ay'
+      end
+
+      if new_line.size > 0
+        new_line += ' '
+      end
+
+      new_line += new_word
+    }
+
+    new_line
+  end
+
+    def to_pig_latin(text)
+      piglatinize(text)
+    end
+    
 end
