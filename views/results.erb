@@ -5,6 +5,8 @@
     <title>title</title>
   </head>
   <body>
-  <%= @piglatin %>
+    <h1>Pig Latinized</h1>
+    <h2><%=@pig.to_pig_latin(@user_phrase)%></h2>
   </body>
 </html>
+

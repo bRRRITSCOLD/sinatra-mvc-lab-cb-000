@@ -12,11 +12,11 @@ class PigLatinizer
 				word.rotate!(1)
 			end
 			return "#{word.join('')}ay"
-		end		
+		end
 	end
 
   	def to_pig_latin(phrase)
-  		phrase = phrase.split(" ")	
+  		phrase = phrase.split(" ")
 		phrase.map! do |word|
 			piglatinize(word)
 		end
